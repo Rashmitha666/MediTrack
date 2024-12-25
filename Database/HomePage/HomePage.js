@@ -1,4 +1,7 @@
-import Patients from "./Patients.js";
+import Patients from "./Patient.js";
+import PatientPage from "./PatientPage/PatientPage.js";
+import Doctor from "./Doctor.js";
+import Appointment from "./Appointment.js";
 
 class HomePage extends HTMLElement
 {
@@ -7,21 +10,83 @@ class HomePage extends HTMLElement
         super();
     }
 
-    initialize()
-    {
-
-    }
 
     connectedCallback()
     {
         this.innerHTML = 
         `
-            <div style="background-color: red; width: 500px; height: 300px;">
-                hi
-            </div>
+            <style>
+            :host {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 80%;
+                    text-align: center;
+                    justify-content: center;
+                }
+                body 
+                {
+                    font-family: Arial, sans-serif;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    align-items: center;
+                    justify-content: center;
+                    height: 70vh;
+                    background-color: #282c34;
+                    color: white;
+                    gap: 20px;
+                }
+                .home-page-class
+                {
+                    display: flex;
+                    justify-content: center;                    
+                    align-items: center;
+                    gap: 50px;
+                    flex-wrap: wrap;
+                }
+                h2
+                {
+                    font-size: 3em;
+                    color: #fff
+                    margin-bottom: 50px; 
+
+                }
+            </style>
+            <h2>MediTrack</h2>
+           <div class= "home-page-class">
+                    
+           </div>
         `;
-        const patientsElement = document.createElement('m-patients');
-        this.appendChild(patientsElement);
+
+        
+        const homePageElement = this.querySelector(".home-page-class");
+        const patientsElement = document.createElement('m-patient');
+        const doctorsElement = document.createElement('m-doctor');
+        const appointmentsElement = document.createElement('m-appointment');
+
+        
+
+        homePageElement.appendChild(patientsElement);
+        homePageElement.appendChild(doctorsElement);
+        homePageElement.appendChild(appointmentsElement);
+
+        patientsElement.addEventListener('click', ()=>
+            
+                this.loadPage("patient-page")
+            );
+
+        this.addEventListener("navigate-back", () => 
+        {
+                this.innerHTML = ""; 
+                this.connectedCallback(); 
+        });
+    }
+    loadPage(pageName)
+    {
+            this.innerHTML = ``;
+
+            const page = document.createElement(pageName);
+            this.appendChild(page);
     }
 
 }

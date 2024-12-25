@@ -1,10 +1,11 @@
 
-class Appointment extends HTMLElement
+class Patient extends HTMLElement
 {
     constructor()
     {
         super();
     }
+
 
     connectedCallback()
     {
@@ -19,7 +20,7 @@ class Appointment extends HTMLElement
                     padding: 0;
                     
                 }
-                .appointment-class
+                .patient-class
                 {
                     background-color: lightblue;
                     width: 200px;
@@ -35,20 +36,21 @@ class Appointment extends HTMLElement
                     cursor: pointer;
                     transition: transform 0.3s, background-color 0.3s;
                 }
-                .appointment-class:hover 
+                .patient-class:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
             </style>
-            <div class = "appointment-class">
-                Appointment
+            <div class = "patient-class">
+                Patient
             </div>
         `;
 
+        
     }
 }
 
-customElements.define("m-appointment",Appointment);
-export default Appointment;
+customElements.define("m-patient",Patient);
+export default Patient;

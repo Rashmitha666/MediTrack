@@ -1,33 +1,56 @@
-var mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-
-var connection = mysql.createConnection(
+async function getConnection() 
 {
-  host     : 'localhost',     
-  user     : 'root',          
-  password : 'nothing',      
-  database : 'sakila'          
-});
+  const connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'nothing',
+    database: 'meditrack'
+  });
 
+  return connection;
+}
 
-connection.connect(function(err) 
+async function insertPatientData(patientData) 
 {
-  if (err) 
+  const connection = await getConnection();
+
+  try 
   {
-    console.error('Error connecting: ' + err.stack);
-    return;
+    const query = 'INSERT INTO Patients (id, name, age, gender, phoneNumber) VALUES (?, ?, ?, ?, ?)';
+    const [results] = await connection.execute(query, [patientData.id, patientData.name, patientData.age, patientData.gender, patientData.phoneNumber]);
+    console.log('Inserted patient with ID:', results.insertId);
+  } 
+  catch (error) 
+  {
+    console.error('Error inserting patient data:', error);
+  } 
+  finally 
+  {
+    connection.end();
   }
-  console.log('Connected as id ' + connection.threadId);
-});
+}
 
-
-s_query = 'SELECT * from city';
-connection.query(s_query, function (error, results, fields) 
+async function viewPatientData(patientId) 
 {
-  if (error) 
-    throw error;
-  console.log('The solution is: ', results);
-});
+  const connection = await getConnection();
 
+  try 
+  {
+    const query = 'SELECT * FROM Patients WHERE Id = ?';
+    const [rows] = await connection.execute(query, [patientId]);
+    console.log('Result fetched');
 
-connection.end();
+    return rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching patient data:', error);
+  } 
+  finally 
+  {
+    connection.end();
+  }
+}
+export {viewPatientData, insertPatientData} 
