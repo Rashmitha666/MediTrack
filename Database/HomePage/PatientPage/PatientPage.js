@@ -1,5 +1,6 @@
 import AddPatientPage from "./AddPatientPage.js";
 import ViewPatientPage from "./ViewPatientPage.js";
+import DeletePatientPage from "./DeletePatientPage.js";
 
 class PatientPage extends HTMLElement
 {

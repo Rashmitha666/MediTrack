@@ -2,6 +2,7 @@ import Patients from "./Patient.js";
 import PatientPage from "./PatientPage/PatientPage.js";
 import Doctor from "./Doctor.js";
 import Appointment from "./Appointment.js";
+import Invoice from "./Billing.js";
 
 class HomePage extends HTMLElement
 {
@@ -19,7 +20,6 @@ class HomePage extends HTMLElement
             :host {
                     display: block;
                     margin: 0 auto;
-                    max-width: 80%;
                     text-align: center;
                     justify-content: center;
                 }
@@ -34,7 +34,8 @@ class HomePage extends HTMLElement
                     height: 70vh;
                     background-color: #282c34;
                     color: white;
-                    gap: 20px;
+                    gap: 10px;
+                    
                 }
                 .home-page-class
                 {
@@ -51,6 +52,7 @@ class HomePage extends HTMLElement
                     margin-bottom: 50px; 
 
                 }
+                    
             </style>
             <h2>MediTrack</h2>
            <div class= "home-page-class">
@@ -63,12 +65,14 @@ class HomePage extends HTMLElement
         const patientsElement = document.createElement('m-patient');
         const doctorsElement = document.createElement('m-doctor');
         const appointmentsElement = document.createElement('m-appointment');
+        const invoiceElement = document.createElement('m-invoice');
 
         
 
         homePageElement.appendChild(patientsElement);
         homePageElement.appendChild(doctorsElement);
         homePageElement.appendChild(appointmentsElement);
+        homePageElement.appendChild(invoiceElement);
 
         patientsElement.addEventListener('click', ()=>
             

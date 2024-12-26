@@ -53,4 +53,24 @@ async function viewPatientData(patientId)
     connection.end();
   }
 }
-export {viewPatientData, insertPatientData} 
+async function deletePatientData(patientId) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+    const query = 'Delete FROM Patients WHERE Id = ?';
+    const [rows] = await connection.execute(query, [patientId]);
+    console.log('Deleted Successfully',rows.deleteId);
+
+  } 
+  catch (error) 
+  {
+    console.error('Error Deleting patient data:', error);
+  } 
+  finally 
+  {
+    connection.end();
+  }
+}
+export {viewPatientData, insertPatientData, deletePatientData} 

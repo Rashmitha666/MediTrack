@@ -1,10 +1,11 @@
 
-class Appointment extends HTMLElement
+class Invoice extends HTMLElement
 {
     constructor()
     {
         super();
     }
+
 
     connectedCallback()
     {
@@ -19,7 +20,7 @@ class Appointment extends HTMLElement
                     padding: 0;
                     
                 }
-                .appointment-class
+                .invoice-class
                 {
                     background-color: lightblue;
                     width: 150px;
@@ -35,20 +36,20 @@ class Appointment extends HTMLElement
                     cursor: pointer;
                     transition: transform 0.3s, background-color 0.3s;
                 }
-                .appointment-class:hover 
+                .invoice-class:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
             </style>
-            <div class = "appointment-class">
-                Appointment
+            <div class = "invoice-class">
+                Invoice
             </div>
         `;
 
     }
 }
 
-customElements.define("m-appointment",Appointment);
-export default Appointment;
+customElements.define("m-invoice",Invoice);
+export default Invoice;

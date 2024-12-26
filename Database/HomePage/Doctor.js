@@ -23,7 +23,7 @@ class Doctor extends HTMLElement
                 .doctor-class
                 {
                     background-color: lightblue;
-                    width: 200px;
+                    width: 150px;
                     height: 270px;
                     display: flex;
                     justify-content: center;
