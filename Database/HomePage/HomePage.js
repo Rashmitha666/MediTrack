@@ -5,7 +5,10 @@ import Doctor from "./Doctor.js";
 import DoctorPage from "./DoctorPage/DoctorPage.js";
 
 import Appointment from "./Appointment.js";
+import AppointmentPage from "./AppointmentPage/AppointmentPage.js";
+
 import Invoice from "./Invoice.js";
+import InvoicePage from "./InvoicePage/InvoicePage.js";
 
 class HomePage extends HTMLElement
 {
@@ -86,6 +89,14 @@ class HomePage extends HTMLElement
             
                 this.loadPage("doctor-page")
         );
+        appointmentsElement.addEventListener('click', ()=>
+
+                this.loadPage("appointment-page")
+        );
+        invoiceElement.addEventListener('click', ()=>
+
+                this.loadPage("invoice-page")
+        )
 
         this.addEventListener("navigate-back", () => 
         {

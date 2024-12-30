@@ -1,5 +1,3 @@
-import { authenticateUser } from "./Connector.js";
-
 class LoginPage extends HTMLElement {
     constructor() {
         super();
@@ -58,45 +56,27 @@ class LoginPage extends HTMLElement {
                 button#submit:hover {
                     background-color: #0056b3;
                 }
-
-                #login-message {
-                    color: red;  
-                    font-size: 14px;
-                    text-align: center;
-                    margin-top: 10px;
-                }
             </style>
+            
 
             <div id="form-container">
-                <div id="login-message"></div>
-                <input type="text" id="musername" placeholder="username" />
-                <input type="password" id="mpassword" placeholder="password" />
+                <input type="text" placeholder="username" />
+                <input type="password" placeholder="password" />
                 <button id="submit">Login</button>
             </div>
         `;
 
-        this.querySelector('#submit').addEventListener('click', async () => {
-           this.handleLogin();
+        const button = this.querySelector('#submit');
+
+        button.addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('login-success', { bubbles: true, composed: true }));
+        });
+
+        const backButton = this.querySelector('#back');
+        backButton.addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('navigate-back', { bubbles: true, composed: true }));
         });
     }
-     async handleLogin(username, password) 
-     {
-        const musername = this.querySelector('#musername').value;
-            const mpassword = this.querySelector('#mpassword').value;
-
-            if (!musername || !mpassword) {
-                this.querySelector('#login-message').textContent = 'Please fill in both fields.';
-                return;
-            }
-
-            const result = await authenticateUser(musername, mpassword);
-            this.querySelector('#login-message').textContent = result.message;
-
-            if (result.success) {
-                this.dispatchEvent(new CustomEvent('login-success', { bubbles: true, composed: true }));
-            }
-        }
-   
 }
 
 customElements.define('m-login', LoginPage);

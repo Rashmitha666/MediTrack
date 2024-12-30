@@ -1,8 +1,8 @@
-import BookAppointmentPage from "./BookAppointmentPage.js";
-import CancelAppointmentPage from "./CancelAppointmentPage.js";
-import ViewAppointmentPage from "./ViewAppointmentPage.js";
+import GenerateInvoicePage from "./GenerateInvoicePage.js";
+import PreviousLogsPage from "./PreviousLogsPage.js";
+import ViewStocksPage from "./ViewStocksPage.js";
 
-class AppointmentPage extends HTMLElement
+class InvoicePage extends HTMLElement
 {
     constructor()
     {
@@ -75,7 +75,7 @@ class AppointmentPage extends HTMLElement
                     gap: 20px;
                 }
 
-                .book-appointment 
+                .generate-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -92,13 +92,13 @@ class AppointmentPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .book-appointment:hover 
+                .generate-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
-                .cancel-appointment 
+                .view-stocks-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -115,13 +115,13 @@ class AppointmentPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .cancel-appointment:hover 
+                .view-stocks-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
-                .view-appointment 
+                .previous-logs-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -138,21 +138,22 @@ class AppointmentPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .view-appointment:hover 
+                .previous-logs-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
+                
             </style>
 
             <div class="container">
             <button id = "back"><<</button>
-            <h1>Appointment Page</h1>
+            <h1>Invoice Page</h1>
             <div class="grid">
-                <div class= "book-appointment">Book Appointment</div>
-                <div class= "cancel-appointment">Cancel Appointment</div>
-                <div class= "view-appointment">View <br>Appointment</div>
+                <div class= "generate-invoice">Generate Invoice</div>
+                <div class= "view-stocks-invoice">View Stocks</div>
+                <div class= "previous-logs-invoice">Previous <br>Logs</div>
                 </div>
         </div>
         `;
@@ -169,13 +170,13 @@ class AppointmentPage extends HTMLElement
             }
         });
 
-        const BookAppointmentElement = this.querySelector(".book-appointment");
-        const CancelAppointmentElement = this.querySelector(".cancel-appointment");
-        const ViewAppointmentElement = this.querySelector(".view-appointment");
+        const GenerateInvoiceElement = this.querySelector(".generate-invoice");
+        const ViewStocksElement = this.querySelector(".view-stocks-invoice");
+        const PreviousLogsElement = this.querySelector(".previous-logs-invoice");
 
-        BookAppointmentElement.addEventListener('click', () => this.loadPage("book-appointment-page"));
-        CancelAppointmentElement.addEventListener('click', () => this.loadPage("cancel-appointment-page"));
-        ViewAppointmentElement.addEventListener('click', () => this.loadPage("view-appointment-page"));
+        GenerateInvoiceElement.addEventListener('click', () => this.loadPage("generate-invoice-page"));
+        ViewStocksElement.addEventListener('click', () => this.loadPage("view-stocks-invoice-page"));
+        PreviousLogsElement.addEventListener('click', () => this.loadPage("previous-logs-invoice-page"));
 
     }
     
@@ -190,5 +191,5 @@ class AppointmentPage extends HTMLElement
     }
 }
 
-customElements.define("appointment-page", AppointmentPage);
-export default AppointmentPage
+customElements.define("invoice-page", InvoicePage);
+export default InvoicePage
