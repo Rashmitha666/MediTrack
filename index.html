@@ -6,10 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
 </head>
+
 <body>
-    <script src= "Database/Connector.js" ></script>
-    <script type="module" src = "Database/HomePage/HomePage.js"></script>
-    
+    <div id="root"></div>
+
+    <script type="module" src="Database/Connector.js"></script>
+    <script type="module" src="Database/HomePage/HomePage.js"></script>
+    <script type="module" src="Database/LoginPage.js"></script>
+    <!-- <script type="module">
+        const root = document.getElementById('root');
+
+        function renderLoginPage() {
+            root.innerHTML = '';
+            const loginPage = document.createElement('m-login');
+            root.appendChild(loginPage);
+
+            loginPage.addEventListener('login-success', () => 
+            {
+                renderHomePage();
+            });
+        }
+
+        function renderHomePage() 
+        {
+            root.innerHTML = '';
+            const homePage = document.createElement('home-page');
+            root.appendChild(homePage);
+
+            homePage.addEventListener('logout', () => 
+            {
+                renderLoginPage();
+            });
+        }
+
+   
+        renderLoginPage();
+    </script> -->
     <home-page></home-page>
 </body>
+
 </html>

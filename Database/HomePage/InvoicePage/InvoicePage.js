@@ -1,10 +1,8 @@
-import ViewDoctorPage from "./ViewDoctorPage.js";
-import CheckDoctorPage from "./CheckDoctorPage.js";
-import AddDoctorPage from "./AddDoctorPage.js";
-import DeleteDoctorPage from "./DeleteDoctorPage.js";
+import GenerateInvoicePage from "./GenerateInvoicePage.js";
+import PreviousLogsPage from "./PreviousLogsPage.js";
+import ViewStocksPage from "./ViewStocksPage.js";
 
-
-class DoctorPage extends HTMLElement
+class InvoicePage extends HTMLElement
 {
     constructor()
     {
@@ -77,7 +75,7 @@ class DoctorPage extends HTMLElement
                     gap: 20px;
                 }
 
-                .add-doctor 
+                .generate-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -94,13 +92,13 @@ class DoctorPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .add-doctor:hover 
+                .generate-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
-                .view-doctor 
+                .view-stocks-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -117,13 +115,13 @@ class DoctorPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .view-doctor:hover 
+                .view-stocks-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
                     color: white;
                 }
-                .check-doctor 
+                .previous-logs-invoice 
                 {
                     background-color: lightblue;
                     width: 350px;
@@ -140,30 +138,7 @@ class DoctorPage extends HTMLElement
                     transition: transform 0.3s, background-color 0.3s;
                 }
 
-                .check-doctor:hover 
-                {
-                    transform: scale(1.1);
-                    background-color: #1e90ff;
-                    color: white;
-                }
-                .delete-doctor 
-                {
-                    background-color: lightblue;
-                    width: 350px;
-                    height: 260px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    color: black;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    cursor: pointer;
-                    transition: transform 0.3s, background-color 0.3s;
-                }
-
-                .delete-doctor:hover 
+                .previous-logs-invoice:hover 
                 {
                     transform: scale(1.1);
                     background-color: #1e90ff;
@@ -174,13 +149,11 @@ class DoctorPage extends HTMLElement
 
             <div class="container">
             <button id = "back"><<</button>
-            <h1>Doctor Page</h1>
+            <h1>Invoice Page</h1>
             <div class="grid">
-                <div class= "view-doctor">View Doctors</div>
-                <div class= "check-doctor">Check Doctors</div>
-                <div class= "add-doctor">Add <br>Doctor</div>
-                <div class= "delete-doctor">Delete Doctor</div>
-
+                <div class= "generate-invoice">Generate Invoice</div>
+                <div class= "view-stocks-invoice">View Stocks</div>
+                <div class= "previous-logs-invoice">Previous <br>Logs</div>
                 </div>
         </div>
         `;
@@ -197,15 +170,13 @@ class DoctorPage extends HTMLElement
             }
         });
 
-        const AddDoctorElement = this.querySelector(".add-doctor");
-        const ViewDoctorElement = this.querySelector(".view-doctor");
-        const DeleteDoctorElement = this.querySelector(".delete-doctor");
-        const CheckDoctorElement = this.querySelector(".check-doctor");
+        const GenerateInvoiceElement = this.querySelector(".generate-invoice");
+        const ViewStocksElement = this.querySelector(".view-stocks-invoice");
+        const PreviousLogsElement = this.querySelector(".previous-logs-invoice");
 
-        AddDoctorElement.addEventListener('click', () => this.loadPage("add-doctor-page"));
-        ViewDoctorElement.addEventListener('click', () => this.loadPage("view-doctor-page"));
-        DeleteDoctorElement.addEventListener('click', () => this.loadPage("delete-doctor-page"));
-        CheckDoctorElement.addEventListener('click', () => this.loadPage("check-doctor-page"));
+        GenerateInvoiceElement.addEventListener('click', () => this.loadPage("generate-invoice-page"));
+        ViewStocksElement.addEventListener('click', () => this.loadPage("view-stocks-invoice-page"));
+        PreviousLogsElement.addEventListener('click', () => this.loadPage("previous-logs-invoice-page"));
 
     }
     
@@ -220,5 +191,5 @@ class DoctorPage extends HTMLElement
     }
 }
 
-customElements.define("doctor-page", DoctorPage);
-export default DoctorPage
+customElements.define("invoice-page", InvoicePage);
+export default InvoicePage
