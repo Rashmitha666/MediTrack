@@ -34,23 +34,39 @@ async function insertPatientData(patientData)
 
 async function viewPatientData(patientId) 
 {
-  const connection = await getConnection();
-
+  let connection;
   try 
   {
-    const query = 'SELECT * FROM Patients WHERE Id = ?';
-    const [rows] = await connection.execute(query, [patientId]);
+    connection = await getConnection();
+
+    let query, params;
+    if (arguments.length === 0) 
+    {
+      query = 'SELECT * FROM Patients';
+      params = [];
+    } 
+    else 
+    {
+      query = 'SELECT * FROM Patients WHERE Id = ?';
+      params = [patientId];
+    }
+
+    const [rows] = await connection.execute(query, params);
     console.log('Result fetched');
 
-    return rows[0];
+    return arguments.length === 0 ? rows : rows[0];
   } 
   catch (error) 
   {
     console.error('Error fetching patient data:', error);
+    throw error;
   } 
   finally 
   {
-    connection.end();
+    if (connection) 
+    {
+      await connection.end(); 
+    }
   }
 }
 async function deletePatientData(patientId) 
@@ -73,4 +89,119 @@ async function deletePatientData(patientId)
     connection.end();
   }
 }
-export {viewPatientData, insertPatientData, deletePatientData} 
+
+
+async function authenticateUser(username, inputPassword) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+      
+      const [rows] = await connection.execute('SELECT password FROM logins WHERE username = ?', [username]);
+
+      if (rows.length === 0) 
+      {
+          return { success: false, message: 'User not found' }; 
+      }
+
+      const storedPassword = rows[0].password;
+
+      if (storedPassword === inputPassword) 
+      {
+          return { success: true, message: 'Login successful' }; 
+      } 
+      else 
+      {
+          return { success: false, message: 'Incorrect password' }; 
+      }
+  } 
+  catch (error) 
+  {
+      console.error('Database error:', error);
+      return { success: false, message: 'An error occurred while authenticating' };
+
+  } 
+  finally 
+  {
+      if (connection) 
+      {
+          await connection.end();
+      }
+  }
+}
+
+async function viewDoctorData(doctorId) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+    if (arguments.length === 0) 
+    {
+      query = "SELECT * FROM doctor";
+      params = [];
+    } 
+    else 
+    {
+      query = 'SELECT * FROM doctor WHERE Id = ?';
+      params = [doctorId];
+    }
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    
+
+    return arguments.length === 0 ? rows : rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching doctor data:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
+async function checkDoctorDate(appointmentDate) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+
+    query = 'SELECT * FROM doctor WHERE appointment_date = ?';
+    params = [appointmentDate];
+    
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    return rows;
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching doctor date:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
+
+export {viewPatientData, insertPatientData, deletePatientData, authenticateUser, viewDoctorData
+        , checkDoctorDate
+} 
