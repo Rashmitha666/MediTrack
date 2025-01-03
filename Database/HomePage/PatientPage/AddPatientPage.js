@@ -97,13 +97,13 @@ class AddPatientPage extends HTMLElement
             <div class="container">
                 <div class="add-patients">
                     <label for="id">ID:</label>
-                    <input type="text" id="id" name="id" placeholder="Enter ID">
+                    <input type="number" id="id" name="id" placeholder="Enter ID" step="1">
 
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" placeholder="Enter Name">
 
                     <label for="age">Age:</label>
-                    <input type="number" id="age" name="age" placeholder="Enter Age">
+                    <input type="number" id="age" name="age" placeholder="Enter Age" min="0">
 
                     <label for="gender">Gender:</label>
                     <select id="gender" name="gender">
@@ -113,7 +113,8 @@ class AddPatientPage extends HTMLElement
                     </select>
 
                     <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">
+                    <input type="text" id="phone" name="phone" placeholder="+91xxxxxxxxxx" 
+           pattern="\+91[6-9][0-9]{9}" >
 
                     <button type="submit" id="submitButton">Submit</button>
                 </div>

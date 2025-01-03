@@ -202,7 +202,216 @@ async function checkDoctorDate(appointmentDate)
     }
   }
 }
+async function getPhoneNumber(appointmentId) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+      const [rows] = await connection.execute(
+          'SELECT p.PhoneNumber FROM patients p INNER JOIN appointments a ON p.Id = a.patient_id WHERE a.id = ?',
+          [appointmentId]
+      );
+      await connection.end();
+
+      if (rows.length > 0) 
+      {
+          return rows[0].PhoneNumber;
+      } 
+      else 
+      {
+          return null;
+      }
+  } 
+  catch (error) 
+  {
+      console.error('Error fetching phone number:', error);
+      return null;
+  }
+}
+async function insertAppointment(appointmentData) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+    const query = 'INSERT INTO appointments (id, doctor_id, patient_id,  date, fee) VALUES (?, ?, ?, ?, ?)';
+    const [results] = await connection.execute(query, [appointmentData.id, appointmentData.doctorId, appointmentData.patientId,  appointmentData.date, appointmentData.fee]);
+    console.log('Booked patient with ID:', results.insertId);
+  } 
+  catch (error) 
+  {
+    console.error('Error Booking patient data:', error);
+  } 
+  finally 
+  {
+    connection.end();
+  }
+}
+async function viewAppointmentData(appointmentDate) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+    if (arguments.length === 0) 
+    {
+      query = "SELECT * FROM appointments";
+      params = [];
+    } 
+    else 
+    {
+      query = 'SELECT * FROM appointments WHERE DATE(date) = ?';
+      params = [appointmentDate];
+    }
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    
+
+    return arguments.length === 0 ? rows : rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching Appointment data:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
+async function deleteAppointmentData(appointmentId) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+    const query = 'Delete FROM appointments WHERE id = ?';
+    const [rows] = await connection.execute(query, [appointmentId]);
+    console.log('Deleted Successfully',rows.deleteId);
+
+  } 
+  catch (error) 
+  {
+    console.error('Error Deleting appointment data:', error);
+  } 
+  finally 
+  {
+    connection.end();
+  }
+}
+async function insertBill(billData) 
+{
+  const connection = await getConnection();
+
+  try 
+  {
+    const id = billData.id ;
+    const patientID = billData.patientID || null;
+    const appointmentID = billData.appointmentID || null;
+    const totalMedicineFee = billData.totalMedicineFee || 0;
+    const totalBillAmount = billData.totalBillAmount || 0;
+    const medicineName = billData.medicineName || '';
+    const quantity = billData.quantity || 0;
+
+    const query = `
+      INSERT INTO bill 
+      (id, patientID, appointmentID, totalMedicineFee, totalBillAmount, medicineName, quantity) 
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+    const [results] = await connection.execute(query, [
+      id,
+      patientID,
+      appointmentID,
+      totalMedicineFee,
+      totalBillAmount,
+      medicineName,
+      quantity,
+    ]);
+
+    console.log('Inserted Bill with ID:', results.insertId);
+  } 
+  catch (error) 
+  {
+    console.error('Error inserting Bill data:', error);
+  } 
+  finally 
+  {
+    connection.end();
+  }
+}
+
+async function getUnitprice(medicineName) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+
+      query = 'SELECT unitPrice FROM pharmacy WHERE medicineName = ?';
+      params = [medicineName];
+    
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    return rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching patient data:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
+async function getConsultationFee(appointmentId) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+
+      query = 'SELECT a.fee FROM appointments a WHERE a.id = ?';
+      params = [appointmentId];
+    
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    return rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching patient data:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
 
 export {viewPatientData, insertPatientData, deletePatientData, authenticateUser, viewDoctorData
-        , checkDoctorDate
+        , checkDoctorDate, getPhoneNumber, insertAppointment, viewAppointmentData, deleteAppointmentData
+        , insertBill, getUnitprice, getConsultationFee
 } 

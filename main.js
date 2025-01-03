@@ -14,7 +14,7 @@ app.on('ready', () => {
   });
 
   mainWindow.loadFile('index.html');
-
+  // mainWindow.setMenuBarVisibility(false);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

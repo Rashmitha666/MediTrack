@@ -1,12 +1,16 @@
-class LoginPage extends HTMLElement {
-    constructor() {
+class LoginPage extends HTMLElement 
+{
+    constructor() 
+    {
         super();
     }
 
-    connectedCallback() {
+    connectedCallback() 
+    {
         this.innerHTML = `
             <style>
-                body {
+                body 
+                {
                     background-color: #282c34;
                     color: white;
                     font-family: Arial, sans-serif;
@@ -18,7 +22,8 @@ class LoginPage extends HTMLElement {
                     margin: 0;
                 }
 
-                #form-container {
+                #form-container 
+                {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -30,12 +35,14 @@ class LoginPage extends HTMLElement {
                     width: 300px;
                 }
 
-                label {
+                label 
+                {
                     font-size: 16px;
                     color: white;
                 }
 
-                input {
+                input 
+                {
                     padding: 8px;
                     font-size: 14px;
                     border: 1px solid #ccc;
@@ -43,7 +50,8 @@ class LoginPage extends HTMLElement {
                     width: 100%;
                 }
 
-                button#submit {
+                button#submit 
+                {
                     padding: 10px 20px;
                     font-size: 14px;
                     color: white;
@@ -53,15 +61,18 @@ class LoginPage extends HTMLElement {
                     cursor: pointer;
                 }
 
-                button#submit:hover {
+                button#submit:hover 
+                {
                     background-color: #0056b3;
                 }
             </style>
             
 
             <div id="form-container">
-                <input type="text" placeholder="username" />
-                <input type="password" placeholder="password" />
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter username" />
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter password" />
                 <button id="submit">Login</button>
             </div>
         `;
@@ -72,10 +83,6 @@ class LoginPage extends HTMLElement {
             this.dispatchEvent(new CustomEvent('login-success', { bubbles: true, composed: true }));
         });
 
-        const backButton = this.querySelector('#back');
-        backButton.addEventListener('click', () => {
-            this.dispatchEvent(new CustomEvent('navigate-back', { bubbles: true, composed: true }));
-        });
     }
 }
 

@@ -113,7 +113,7 @@ class CheckDoctorPage extends HTMLElement
       </style>
       <button id="back"><<</button>
       <div id="form-container">
-        <label for="doctor-id">Enter Date :</label>
+        <label for="a-date">Enter Date :</label>
         <input type="date" id="a-date" placeholder="YYYY-MM-DD" />
         <button id="submit">Submit</button>
       </div>
@@ -227,8 +227,4 @@ class CheckDoctorPage extends HTMLElement
 }
 
 customElements.define("check-doctor-page", CheckDoctorPage);
-<<<<<<< HEAD
 export default CheckDoctorPage;
-=======
-export default CheckDoctorPage;
->>>>>>> 794601e084f35ebcbe40de9b6e1acdaa6139b019
