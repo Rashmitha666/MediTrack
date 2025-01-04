@@ -12,15 +12,14 @@ class ViewPatientPage extends HTMLElement
         this.innerHTML = 
         `
             <style>
-                body 
+                body
                 {
-                    background-color: #282c34;
+                    background-color: #282c34; 
                     color: white;
                     font-family: Arial, sans-serif;
                     display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
+                    align-items: center; 
+                    justify-content: center; 
                     height: 100vh;
                     margin: 0;
                 }
@@ -89,16 +88,28 @@ class ViewPatientPage extends HTMLElement
                 {
                     background-color: #0056b3;
                 }
+                #outer-container 
+                {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 20px; 
+                    padding: 20px;
+                    border-radius: 10px; 
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                }
             </style>
 
             <button id="back"> << </button>
-
+            <div id="outer-container">
             <div id="form-container">
                 <label for="patient-id">Enter Patient ID:</label>
                 <input type="number" id="patient-id" placeholder="Patient ID" />
                 <button id="submit">Submit</button>
                 
                 <button id="view">View All</button>
+            </div>
             </div>
             <div id="patient-data"></div>
 

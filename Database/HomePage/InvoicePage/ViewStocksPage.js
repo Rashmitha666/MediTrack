@@ -12,15 +12,14 @@ class ViewStocksPage extends HTMLElement
         this.innerHTML = 
         `
             <style>
-            body 
+            body
             {
-                background-color: #282c34;
+                background-color: #282c34; 
                 color: white;
                 font-family: Arial, sans-serif;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+                align-items: center; 
+                justify-content: center; 
                 height: 100vh;
                 margin: 0;
             }
@@ -85,14 +84,28 @@ class ViewStocksPage extends HTMLElement
             {
                 background-color: #0056b3;
             }
+            
+            #outer-container 
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px; 
+                padding: 20px;
+                border-radius: 10px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            }
            </style>
            <button id = "back"><<</button>
+           <div id = "outer-container">
            <div id="form-container">
                 <label for="medicine-name">Enter Medicine Name:</label>
                 <input type="text" id="medicine-name" placeholder="Medicine Name" />
                 <button id="submit">Submit</button>
                 
                 <button id="view">View All</button>
+            </div>
             </div>
             <div id="medicine-data"></div>
         `;

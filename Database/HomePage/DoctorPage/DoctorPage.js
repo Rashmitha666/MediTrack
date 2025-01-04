@@ -1,8 +1,6 @@
 import ViewDoctorPage from "./ViewDoctorPage.js";
 import CheckDoctorPage from "./CheckDoctorPage.js";
 
-
-
 class DoctorPage extends HTMLElement
 {
     constructor()

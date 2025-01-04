@@ -1,3 +1,5 @@
+import { authenticateUser } from './Connector.js'; 
+
 class LoginPage extends HTMLElement 
 {
     constructor() 
@@ -66,7 +68,6 @@ class LoginPage extends HTMLElement
                     background-color: #0056b3;
                 }
             </style>
-            
 
             <div id="form-container">
                 <label for="username">Username:</label>
@@ -79,10 +80,28 @@ class LoginPage extends HTMLElement
 
         const button = this.querySelector('#submit');
 
-        button.addEventListener('click', () => {
-            this.dispatchEvent(new CustomEvent('login-success', { bubbles: true, composed: true }));
-        });
+        button.addEventListener('click', async () => 
+            {
+            const username = this.querySelector('#username').value.trim();
+            const password = this.querySelector('#password').value.trim();
 
+            if (!username || !password) 
+            {
+                alert('Please fill in both fields.');
+                return;
+            }
+
+            const result = await authenticateUser(username, password);
+
+            if (result.success) 
+            {
+                this.dispatchEvent(new CustomEvent('login-success', { bubbles: true, composed: true }));
+            } 
+            else 
+            {
+                alert(result.message); 
+            }
+        });
     }
 }
 

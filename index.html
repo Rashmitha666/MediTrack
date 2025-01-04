@@ -4,45 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Dynamic Login and Home Page</title>
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root"></div> <!-- Root container for rendering pages -->
 
     <script type="module" src="Database/Connector.js"></script>
     <script type="module" src="Database/HomePage/HomePage.js"></script>
     <script type="module" src="Database/LoginPage.js"></script>
-    <!-- <script type="module">
+    <script type="module">
         const root = document.getElementById('root');
 
         function renderLoginPage() {
-            root.innerHTML = '';
-            const loginPage = document.createElement('m-login');
-            root.appendChild(loginPage);
+            root.innerHTML = ''; // Clear previous content
+            const loginPage = document.createElement('m-login'); // Create login component
+            root.appendChild(loginPage); // Append it to the root
 
-            loginPage.addEventListener('login-success', () => 
-            {
-                renderHomePage();
+            loginPage.addEventListener('login-success', () => {
+                renderHomePage(); // Render home page on successful login
             });
         }
 
-        function renderHomePage() 
-        {
-            root.innerHTML = '';
-            const homePage = document.createElement('home-page');
-            root.appendChild(homePage);
+        function renderHomePage() {
+            root.innerHTML = ''; // Clear previous content
+            const homePage = document.createElement('home-page'); // Create home page component
+            root.appendChild(homePage); // Append it to the root
 
-            homePage.addEventListener('logout', () => 
-            {
-                renderLoginPage();
+            homePage.addEventListener('logout', () => {
+                renderLoginPage(); // Render login page on logout
             });
         }
 
-   
-        renderLoginPage();
-    </script> -->
-    <home-page></home-page>
+        renderLoginPage(); // Start with the login page
+    </script>
 </body>
 
 </html>

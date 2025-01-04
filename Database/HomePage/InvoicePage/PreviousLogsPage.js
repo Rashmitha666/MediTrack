@@ -1,3 +1,4 @@
+import { viewBillData } from "../../Connector.js";
 
 class PreviousLogsPage extends HTMLElement
 {
@@ -11,19 +12,19 @@ class PreviousLogsPage extends HTMLElement
         this.innerHTML = 
         `
             <style>
-            body 
-            {
-                background-color: #282c34;
-                color: white;
-                font-family: Arial, sans-serif;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                margin: 0;
-            }
-            #back 
+                body
+                {
+                        background-color: #282c34; 
+                        color: white;
+                        font-family: Arial, sans-serif;
+                        display: flex;
+                        align-items: center; 
+                        justify-content: center; 
+                        height: 100vh;
+                        margin: 0;
+                }
+  
+                #back 
                 {
                     position: fixed;          
                     top: 10px;                
@@ -57,7 +58,7 @@ class PreviousLogsPage extends HTMLElement
                     width: 300px;
                 }
                 
-                    label 
+                label 
                 {
                     font-size: 16px;
                     color: white;
@@ -86,9 +87,22 @@ class PreviousLogsPage extends HTMLElement
                 {
                     background-color: #0056b3;
                 }
+                
+                #outer-container 
+                {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 20px; 
+                    padding: 20px;
+                    border-radius: 10px; 
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                }
            </style>
           <button id = "back"><<</button>
-          <div id="form-container">
+          <div id = "outer-container">
+            <div id="form-container">
                 <label for="bill-id">Enter Bill ID:</label>
                 <input type="number" id="bill-id" placeholder="Bill ID:" />
                 <button id="submit">Submit</button>
@@ -96,6 +110,8 @@ class PreviousLogsPage extends HTMLElement
                 <button id="view">View All</button>
             </div>
             <div id="bill-data"></div>
+
+            </div>
 
         `;
         const backButton = this.querySelector("#back");
@@ -133,7 +149,7 @@ class PreviousLogsPage extends HTMLElement
       
         try 
         {
-          const billData = await viewMedicineData(billID);
+          const billData = await viewBillData(billID);
           const billDataContainer = this.querySelector("#bill-data");
           billDataContainer.innerHTML = "";
       
@@ -180,11 +196,13 @@ class PreviousLogsPage extends HTMLElement
     createTable(data, container) 
     {
       const table = document.createElement("table");
+      table.style.margin = "0 auto"; 
+
       table.style.borderCollapse = "collapse";
       table.style.width = "100%";
       table.style.marginTop = "20px";
     
-      const headers = ["id", "patientID", "appointmentID", "stock"];
+      const headers = ["id", "patientID","appointmentID","totalMedicineFee","totalBillAmount","medicineName","quantity"];
       const thead = document.createElement("thead");
       const headerRow = document.createElement("tr");
     
@@ -209,9 +227,12 @@ class PreviousLogsPage extends HTMLElement
         const row = document.createElement("tr");
         const details = [
           record.id,
+          record.patientID,
+          record.appointmentID,
+          record.totalMedicineFee,
+          record.totalBillAmount,
           record.medicineName,
-          record.unitPrice,
-          record.stock,
+          record.quantity
         ];
     
         details.forEach((detail) => {

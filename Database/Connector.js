@@ -448,8 +448,45 @@ async function viewMedicineData(medicineName)
     }
   }
 }
+async function viewBillData(billId) 
+{
+  let connection;
+  try 
+  {
+    connection = await getConnection();
+
+    let query, params;
+    if (arguments.length === 0) 
+    {
+      query = 'SELECT * FROM bill';
+      params = [];
+    } 
+    else 
+    {
+      query = 'SELECT * FROM bill WHERE id = ?';
+      params = [billId];
+    }
+
+    const [rows] = await connection.execute(query, params);
+    console.log('Result fetched');
+
+    return arguments.length === 0 ? rows : rows[0];
+  } 
+  catch (error) 
+  {
+    console.error('Error fetching bill data:', error);
+    throw error;
+  } 
+  finally 
+  {
+    if (connection) 
+    {
+      await connection.end(); 
+    }
+  }
+}
 
 export {viewPatientData, insertPatientData, deletePatientData, authenticateUser, viewDoctorData
         , checkDoctorDate, getPhoneNumber, insertAppointment, viewAppointmentData, deleteAppointmentData
-        , insertBill, getUnitprice, getConsultationFee,viewMedicineData
+        , insertBill, getUnitprice, getConsultationFee,viewMedicineData,viewBillData
 } 
