@@ -1,4 +1,5 @@
 import { viewMedicineData } from "../../Connector.js";
+
 class ViewStocksPage extends HTMLElement
 {
     constructor()
@@ -120,6 +121,7 @@ class ViewStocksPage extends HTMLElement
     async handleSubmit() 
     {
         const medicineName = this.getMedicineName();
+
         if (!medicineName) 
         {
           alert("Please enter a Medicine Name.");
@@ -179,7 +181,7 @@ class ViewStocksPage extends HTMLElement
       table.style.width = "100%";
       table.style.marginTop = "20px";
     
-      const headers = ["ID", "PatientID", "AppointmentID", "MedicineName", "Quantity"];
+      const headers = ["Id", "Medicine Name", "Unit Price", "stock"];
       const thead = document.createElement("thead");
       const headerRow = document.createElement("tr");
     
@@ -203,11 +205,10 @@ class ViewStocksPage extends HTMLElement
       {
         const row = document.createElement("tr");
         const details = [
-          record.ID,
-          record.PatientID,
-          record.AppointmentID,
-          record.MedicineName,
-          record.Quantity,
+          record.id,
+          record.medicineName,
+          record.unitPrice,
+          record.stock,
         ];
     
         details.forEach((detail) => {

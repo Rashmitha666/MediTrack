@@ -1,7 +1,6 @@
 import ViewDoctorPage from "./ViewDoctorPage.js";
 import CheckDoctorPage from "./CheckDoctorPage.js";
-import AddDoctorPage from "./AddDoctorPage.js";
-import DeleteDoctorPage from "./DeleteDoctorPage.js";
+
 
 
 class DoctorPage extends HTMLElement
@@ -77,29 +76,7 @@ class DoctorPage extends HTMLElement
                     gap: 20px;
                 }
 
-                .add-doctor 
-                {
-                    background-color: lightblue;
-                    width: 350px;
-                    height: 260px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    color: black;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    cursor: pointer;
-                    transition: transform 0.3s, background-color 0.3s;
-                }
-
-                .add-doctor:hover 
-                {
-                    transform: scale(1.1);
-                    background-color: #1e90ff;
-                    color: white;
-                }
+               
                 .view-doctor 
                 {
                     background-color: lightblue;
@@ -146,29 +123,7 @@ class DoctorPage extends HTMLElement
                     background-color: #1e90ff;
                     color: white;
                 }
-                .delete-doctor 
-                {
-                    background-color: lightblue;
-                    width: 350px;
-                    height: 260px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    color: black;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    cursor: pointer;
-                    transition: transform 0.3s, background-color 0.3s;
-                }
-
-                .delete-doctor:hover 
-                {
-                    transform: scale(1.1);
-                    background-color: #1e90ff;
-                    color: white;
-                }
+                
                 
             </style>
 
@@ -178,9 +133,6 @@ class DoctorPage extends HTMLElement
             <div class="grid">
                 <div class= "view-doctor">View Doctors</div>
                 <div class= "check-doctor">Check Doctors</div>
-                <div class= "add-doctor">Add <br>Doctor</div>
-                <div class= "delete-doctor">Delete Doctor</div>
-
                 </div>
         </div>
         `;
@@ -197,14 +149,10 @@ class DoctorPage extends HTMLElement
             }
         });
 
-        const AddDoctorElement = this.querySelector(".add-doctor");
         const ViewDoctorElement = this.querySelector(".view-doctor");
-        const DeleteDoctorElement = this.querySelector(".delete-doctor");
         const CheckDoctorElement = this.querySelector(".check-doctor");
 
-        AddDoctorElement.addEventListener('click', () => this.loadPage("add-doctor-page"));
         ViewDoctorElement.addEventListener('click', () => this.loadPage("view-doctor-page"));
-        DeleteDoctorElement.addEventListener('click', () => this.loadPage("delete-doctor-page"));
         CheckDoctorElement.addEventListener('click', () => this.loadPage("check-doctor-page"));
 
     }

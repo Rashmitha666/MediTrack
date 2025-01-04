@@ -421,12 +421,12 @@ async function viewMedicineData(medicineName)
     let query, params;
     if (arguments.length === 0) 
     {
-      query = 'SELECT * FROM bill';
+      query = 'SELECT * FROM pharmacy';
       params = [];
     } 
     else 
     {
-      query = 'SELECT * FROM bill WHERE MedicineName = ?';
+      query = 'SELECT * FROM pharmacy WHERE medicineName = ?';
       params = [medicineName];
     }
 
