@@ -153,85 +153,85 @@ class ViewPatientPage extends HTMLElement
           console.error("Error fetching patient data:", error);
           alert("An error occurred while fetching patient data.");
         }
-      }
+    }
       
-      async handleView() 
+    async handleView() 
+    {
+      try 
       {
-        try 
+        const patientData = await viewPatientData();
+        const patientDataContainer = this.querySelector("#patient-data");
+        patientDataContainer.innerHTML = "";
+    
+        if (patientData.length > 0) 
         {
-          const patientData = await viewPatientData();
-          const patientDataContainer = this.querySelector("#patient-data");
-          patientDataContainer.innerHTML = "";
-      
-          if (patientData.length > 0) 
-          {
-            this.createTable(patientData, patientDataContainer);
-          } 
-          else 
-          {
-            patientDataContainer.textContent = "No patients found.";
-          }
+          this.createTable(patientData, patientDataContainer);
         } 
-        catch (error) 
+        else 
         {
-          console.error("Error fetching patient data:", error);
-          alert("An error occurred while fetching patient data.");
+          patientDataContainer.textContent = "No patients found.";
         }
-      }
-      
-      createTable(data, container) 
+      } 
+      catch (error) 
       {
-        const table = document.createElement("table");
-        table.style.borderCollapse = "collapse";
-        table.style.width = "100%";
-        table.style.marginTop = "20px";
-      
-        const headers = ["ID", "Name", "Age", "Gender", "PhoneNumber"];
-        const thead = document.createElement("thead");
-        const headerRow = document.createElement("tr");
-      
-        headers.forEach((header) => 
-        {
-          const th = document.createElement("th");
-          th.textContent = header;
-          th.style.border = "1px solid #ccc";
-          th.style.padding = "8px";
-          th.style.backgroundColor = "#3c4043";
-          th.style.color = "white";
-          th.style.textAlign = "center";
-          headerRow.appendChild(th);
-        });
-      
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-      
-        const tbody = document.createElement("tbody");
-        data.forEach((record) => 
-        {
-          const row = document.createElement("tr");
-          const details = [
-            record.Id,
-            record.Name,
-            record.Age,
-            record.Gender,
-            record.PhoneNumber,
-          ];
-      
-          details.forEach((detail) => {
-            const td = document.createElement("td");
-            td.textContent = detail;
-            td.style.border = "1px solid #ccc";
-            td.style.padding = "8px";
-            td.style.textAlign = "center";
-            row.appendChild(td);
-          });
-      
-          tbody.appendChild(row);
-        });
-      
-        table.appendChild(tbody);
-        container.appendChild(table);
+        console.error("Error fetching patient data:", error);
+        alert("An error occurred while fetching patient data.");
       }
+    }
+      
+    createTable(data, container) 
+    {
+      const table = document.createElement("table");
+      table.style.borderCollapse = "collapse";
+      table.style.width = "100%";
+      table.style.marginTop = "20px";
+    
+      const headers = ["ID", "Name", "Age", "Gender", "PhoneNumber"];
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+    
+      headers.forEach((header) => 
+      {
+        const th = document.createElement("th");
+        th.textContent = header;
+        th.style.border = "1px solid #ccc";
+        th.style.padding = "8px";
+        th.style.backgroundColor = "#3c4043";
+        th.style.color = "white";
+        th.style.textAlign = "center";
+        headerRow.appendChild(th);
+      });
+    
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+    
+      const tbody = document.createElement("tbody");
+      data.forEach((record) => 
+      {
+        const row = document.createElement("tr");
+        const details = [
+          record.Id,
+          record.Name,
+          record.Age,
+          record.Gender,
+          record.PhoneNumber,
+        ];
+    
+        details.forEach((detail) => {
+          const td = document.createElement("td");
+          td.textContent = detail;
+          td.style.border = "1px solid #ccc";
+          td.style.padding = "8px";
+          td.style.textAlign = "center";
+          row.appendChild(td);
+        });
+    
+        tbody.appendChild(row);
+      });
+    
+      table.appendChild(tbody);
+      container.appendChild(table);
+    }
       
 }
 
